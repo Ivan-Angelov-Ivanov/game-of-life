@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GameOfLife</string>
+    <string name="play">Play</string>
+    <string name="button">Button</string>
+    <string name="clear">Clear</string>
+    <string name="random">Random</string>
+    <string name="stop">stop</string>
+</resources>
