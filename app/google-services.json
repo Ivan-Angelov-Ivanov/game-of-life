@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "328772802946",
+    "project_id": "gameoflife-ed326",
+    "storage_bucket": "gameoflife-ed326.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328772802946:android:ef8d2c4f3b9b09d3ac179b",
+        "android_client_info": {
+          "package_name": "com.example.gameoflife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328772802946-lrn877a2cal2drtktg11imr6r2ttmbei.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gameoflife",
+            "certificate_hash": "958f6b90d549f8df8cdbe5e8adf201f770f6a6f6"
+          }
+        },
+        {
+          "client_id": "328772802946-0o7r71beu37064l3eef5jhsese8obusd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4k5CF6XFAvuh_FciaxiKI6rEpvsg4808"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328772802946-0o7r71beu37064l3eef5jhsese8obusd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
