@@ -9,7 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 
 
-class PixelGrid(context: Context?) :
+class PixelGrid(context: Context) :
     View(context) {
     var numColumns = 30
     var numRows = 30
