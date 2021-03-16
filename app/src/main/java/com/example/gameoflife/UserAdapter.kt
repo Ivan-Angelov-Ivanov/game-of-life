@@ -18,7 +18,7 @@ class UserAdapter( val callback: (User) -> Unit) :
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name = view.findViewById<TextView>(R.id.text_item)!!
         fun bind(userViewModel: User) {
-            name.text = userViewModel.email.toString()
+            name.text = userViewModel.email
         }
     }
 
