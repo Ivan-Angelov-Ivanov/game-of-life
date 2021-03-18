@@ -1,6 +1,7 @@
 package com.example.gameoflife
 
 import android.app.Application
+import com.example.gameoflife.roomdb.UserRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
