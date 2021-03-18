@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.gameoflife.roomdb.User
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val repository: UserRepository): ViewModel() {
@@ -11,6 +12,10 @@ class UserViewModel(private val repository: UserRepository): ViewModel() {
 
     fun insert(user: User) = viewModelScope.launch {
         repository.insert(user)
+    }
+
+    fun postUser(user: User) = viewModelScope.launch {
+        repository.postUser(user)
     }
 }
 
