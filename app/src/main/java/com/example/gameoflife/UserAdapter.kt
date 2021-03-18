@@ -5,10 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
-/**
- * Adapter for the [RecyclerView] in [UserListFragment].
- */
+import com.example.gameoflife.roomdb.User
 
 class UserAdapter( val callback: (User) -> Unit) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
