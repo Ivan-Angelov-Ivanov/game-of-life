@@ -18,5 +18,8 @@ jobs:
         with:
           docker-android-tag: api-29-ndk-v1.1.0
           exec: |
+            apt-get update;
+            apt-get install -y curl sudo;
+            curl -sL firebase.tools | bash;
             bundle install;
             bundle exec fastlane build_and_deploy;
