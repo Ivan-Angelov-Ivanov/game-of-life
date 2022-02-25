@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 jobs:
   release-nightly:
-    runs-on: GitHub-hosted
+    runs-on:  self-hosted
 
     steps:
       - name: Checkout
