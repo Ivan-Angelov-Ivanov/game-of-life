@@ -21,10 +21,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    def signing_secret = System.getenv('ANDROID_SIGN_SECRET')
+    signingConfigs {
+        defaultConfig {
+            storeFile file("gameoflife_keystore.jks")
+            storePassword signing_secret
+            keyAlias "defaultconf"
+            keyPassword signing_secret
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.defaultConfig
         }
 
         debug {
@@ -36,16 +47,19 @@ android {
         production {
             dimension "version"
             manifestPlaceholders = [app_name: "GameOfLife"]
+            signingConfig signingConfigs.defaultConfig
         }
 
         staging {
             dimension "version"
             manifestPlaceholders = [app_name: "GameOfLife-staging"]
+            signingConfig signingConfigs.defaultConfig
         }
 
         envTest {
             dimension "version"
             manifestPlaceholders = [app_name: "GameOfLife-test"]
+            signingConfig signingConfigs.defaultConfig
         }
     }
     compileOptions {
