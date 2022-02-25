@@ -110,7 +110,7 @@ platform :android do
     ## Distribute
     lane :distribute_to_firebase do |options|
       appid = "1:328772802946:android:ef8d2c4f3b9b09d3ac179b"
-      release_notes = ""
+      release_notes = "Test"
       if options[:release_notes]
         release_notes = options[:release_notes]
       end
@@ -118,7 +118,8 @@ platform :android do
       firebase_app_distribution(
         app: appid,
         release_notes: release_notes,
-        groups: "test group"
+        groups: "test group",
+        debug: false
       )
     end
 

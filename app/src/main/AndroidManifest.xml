@@ -16,7 +16,8 @@
         android:theme="@style/Theme.GameOfLife"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
