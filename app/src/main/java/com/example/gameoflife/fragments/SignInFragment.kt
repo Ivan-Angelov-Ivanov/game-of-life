@@ -3,6 +3,7 @@ package com.example.gameoflife.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,10 @@ class SignInFragment : Fragment() {
             if(selectedEmail != null) {
                 inputEmail.setText(selectedEmail)
                 inputEmail.isEnabled = false
+            }
+            inputPassword.setOnKeyListener{_,keyCode,_ ->
+                Log.e("Clicked", "$keyCode")
+                true
             }
             signInBackBtn.setOnClickListener { backToUserList() }
             signInBtn.setOnClickListener {

@@ -1,0 +1,149 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+    #Deploy
+    lane :build_and_deploy do |options|
+
+      build_deploy_test
+      build_deploy_staging
+      build_deploy_prod
+
+      postbuild_actions
+    end
+
+    lane :build_deploy_test do
+      if should_skip_build
+        UI.important 'No changes since last build'
+        next
+      end
+
+      build(environment: "test")
+      distribute_to_firebase(environment: "test")
+    end
+
+
+    lane :build_deploy_staging do
+      if should_skip_build
+        UI.important 'No changes since last build'
+        next
+      end
+
+      build(environment: "staging")
+      distribute_to_firebase(environment: "staging")
+    end
+
+
+    lane :build_deploy_prod do
+      if should_skip_build
+        UI.important 'No changes since last build'
+        next
+      end
+
+      build(environment: "production")
+      distribute_to_firebase(environment: "production")
+    end
+
+    ##Postbuild Actions
+    lane :postbuild_actions do
+
+      if should_skip_build
+        UI.important 'No changes since last build'
+        next
+      end
+
+      buildNumber = get_build_number_android
+      releaseType = "Release"
+
+      changelog = changelog_from_git_commits(
+        pretty: "- %s",
+        tag_match_pattern: "#{releaseType}/*"
+      )
+
+      add_git_tag(
+        grouping: "build",
+        prefix: "build-",
+        postfix: "",
+        build_number: buildNumber,
+        message: changelog
+      )
+      increment_build_number_android
+      git_commit(path: ["./app/build.gradle"], message: "Bump build to #{get_build_number_android} [automated]")
+
+      push_to_git_remote()
+    end
+
+    ## Build
+    lane :build do |options|
+      environment = options[:environment]
+
+      if environment == "test"
+        environment = "envTest"
+      elsif environment == "staging"
+        environment = "staging"
+      else
+        environment = "production"
+      end
+
+      gradle(
+        task: "assemble",
+        flavor: environment,
+        build_type: "Release"
+      )
+    end
+
+    ## Distribute
+    lane :distribute_to_firebase do
+      appid = "1:328772802946:android:ef8d2c4f3b9b09d3ac179b"
+      release_notes = ""
+      if options[:release_notes]
+        release_notes = options[:release_notes]
+      end
+
+      firebase_app_distribution(
+        app: appid,
+        testers: "test group",
+        release_notes: release_notes
+      )
+    end
+
+    lane :should_skip_build do
+      last_commit = last_git_commit[:message]
+      if last_commit.include? "[automated]"
+        true
+      else
+        false
+      end
+    end
+
+  ##Utils
+  lane :increment_build_number_android do
+    increment_version_code(
+      gradle_file_path: "app/build.gradle",
+    )
+  end
+
+  lane :get_build_number_android do
+    code = get_version_code(
+      gradle_file_path:"app/build.gradle",
+      ext_constant_name:"versionCode"
+    )
+    code
+  end
+end
+end

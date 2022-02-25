@@ -3,7 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id  "androidx.navigation.safeargs.kotlin"
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 
@@ -25,6 +25,27 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        production {
+            dimension "version"
+            manifestPlaceholders = [app_name: "GameOfLife"]
+        }
+
+        staging {
+            dimension "version"
+            manifestPlaceholders = [app_name: "GameOfLife-staging"]
+        }
+
+        envTest {
+            dimension "version"
+            manifestPlaceholders = [app_name: "GameOfLife-test"]
         }
     }
     compileOptions {

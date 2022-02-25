@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface UserApiService {
-    @POST("user")
+    @POST("api/user")
     suspend fun addUser(@Body user: User): Response<ResponseBody>
 }
 
