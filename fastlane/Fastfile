@@ -18,26 +18,13 @@ default_platform(:android)
 platform :android do
 
     #Deploy
-    lane :build_and_deploy do |options|
+    lane :build_and_deploy do
 
-      environments = options[:environments]
-        if !environments
-          environments = "test,staging,production"
-        end
+      build_deploy_test
+      build_deploy_staging
+      build_deploy_prod
 
-        if environments.include? "test"
-          build_deploy_test
-        end
-
-        if environments.include? "staging"
-          build_deploy_staging
-        end
-
-        if environments.include? "prod"
-          build_deploy_prod
-        end
-
-      postbuild_actions(releaseType: options[:releaseType] )
+      postbuild_actions
     end
 
     lane :build_deploy_test do
@@ -73,7 +60,7 @@ platform :android do
     end
 
     ##Postbuild Actions
-    lane :postbuild_actions do |options|
+    lane :postbuild_actions do
 
       if should_skip_build
         UI.important 'No changes since last build'
@@ -82,10 +69,6 @@ platform :android do
 
       buildNumber = get_build_number_android
       releaseType = "Release"
-
-      if options[:releaseType] == "nightly"
-        releaseType = "build"
-      end
 
       changelog = changelog_from_git_commits(
         pretty: "- %s",
@@ -125,7 +108,7 @@ platform :android do
     end
 
     ## Distribute
-    lane :distribute_to_firebase do
+    lane :distribute_to_firebase do |options|
       appid = "1:328772802946:android:ef8d2c4f3b9b09d3ac179b"
       release_notes = ""
       if options[:release_notes]
