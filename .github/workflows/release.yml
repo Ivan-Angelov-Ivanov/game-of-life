@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 jobs:
   release-nightly:
-    runs-on:  self-hosted
+    runs-on: windows-2022
 
     steps:
       - name: Checkout
