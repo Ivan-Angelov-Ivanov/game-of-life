@@ -20,11 +20,24 @@ platform :android do
     #Deploy
     lane :build_and_deploy do |options|
 
-      build_deploy_test
-      build_deploy_staging
-      build_deploy_prod
+      environments = options[:environments]
+        if !environments
+          environments = "test,staging,production"
+        end
 
-      postbuild_actions
+        if environments.include? "test"
+          build_deploy_test
+        end
+
+        if environments.include? "staging"
+          build_deploy_staging
+        end
+
+        if environments.include? "prod"
+          build_deploy_prod
+        end
+
+      postbuild_actions(releaseType: options[:releaseType] )
     end
 
     lane :build_deploy_test do
@@ -60,7 +73,7 @@ platform :android do
     end
 
     ##Postbuild Actions
-    lane :postbuild_actions do
+    lane :postbuild_actions do |options|
 
       if should_skip_build
         UI.important 'No changes since last build'
@@ -69,6 +82,10 @@ platform :android do
 
       buildNumber = get_build_number_android
       releaseType = "Release"
+
+      if options[:releaseType] == "nightly"
+        releaseType = "build"
+      end
 
       changelog = changelog_from_git_commits(
         pretty: "- %s",
