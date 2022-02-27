@@ -26,7 +26,7 @@ android {
         defaultConfig {
             storeFile file("gameoflife_keystore.jks")
             storePassword signing_secret
-            keyAlias "appkey"
+            keyAlias "defaultconf"
             keyPassword signing_secret
         }
     }
