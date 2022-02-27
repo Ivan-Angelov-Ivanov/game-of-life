@@ -24,4 +24,6 @@ jobs:
             apt-get install -y curl sudo;
             curl -sL firebase.tools | bash;
             bundle install
-            bundle exec fastlane build_and_deploy;
+            git config --global user.email "ivan98angelov@gmail.com"
+            git config --global user.name "Github Actions"
+            bundle exec fastlane build_and_deploy
