@@ -117,7 +117,7 @@ platform :android do
       firebase_app_distribution(
         app: appid,
         release_notes: release_notes,
-        groups: "test group",
+        groups: "test-group",
         debug: false
       )
     end
