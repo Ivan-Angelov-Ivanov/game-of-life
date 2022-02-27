@@ -17,7 +17,7 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,8 +25,8 @@ android {
     signingConfigs {
         defaultConfig {
             storeFile file("gameoflife_keystore.jks")
-            storePassword signing_secret
-            keyAlias "appkey"
+            storePassword "test123"
+            keyAlias "defaultconf"
             keyPassword signing_secret
         }
     }
@@ -63,8 +63,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'

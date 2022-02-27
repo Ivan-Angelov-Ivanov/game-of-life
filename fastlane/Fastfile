@@ -18,26 +18,12 @@ default_platform(:android)
 platform :android do
 
     #Deploy
-    lane :build_and_deploy do |options|
+    lane :build_and_deploy do
+        build_deploy_test
+        build_deploy_staging
+        build_deploy_prod
 
-          environments = options[:environments]
-          if !environments
-            environments = "test,staging,production"
-          end
-
-          if environments.include? "test"
-            build_deploy_test
-          end
-
-          if environments.include? "staging"
-            build_deploy_staging
-          end
-
-          if environments.include? "prod"
-            build_deploy_prod
-          end
-
-      postbuild_actions
+        postbuild_actions
     end
 
     lane :build_deploy_test do
@@ -131,8 +117,7 @@ platform :android do
       firebase_app_distribution(
         app: appid,
         release_notes: release_notes,
-        groups: "test group",
-        debug: false
+        groups: "test group"
       )
     end
 

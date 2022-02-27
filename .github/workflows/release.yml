@@ -24,4 +24,4 @@ jobs:
             apt-get install -y curl sudo;
             curl -sL firebase.tools | bash;
             bundle install;
-            bundle exec fastlane build_and_deploy releaseType:nightly;
+            bundle exec fastlane build_and_deploy;
