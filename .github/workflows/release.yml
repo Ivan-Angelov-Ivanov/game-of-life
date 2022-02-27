@@ -13,6 +13,12 @@ jobs:
           ref: master
           fetch-depth: 0
 
+      - name: Reset branch to version from origin
+        run: git reset --hard origin/master
+
+      - name: Delete local tags and fetch them from origin
+        run: git tag -l | xargs git tag -d && git fetch -t
+
       - name: Execute Build and Deploy
         uses: fabernovel/docker-android@v1.4.1
         with:
