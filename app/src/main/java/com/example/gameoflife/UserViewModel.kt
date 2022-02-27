@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.gameoflife.roomdb.User
 import kotlinx.coroutines.launch
-import java.util.*
 
 class UserViewModel(private val repository: UserRepository): ViewModel() {
     val allUsers: LiveData<List<User>> = repository.allUsers
@@ -21,7 +20,7 @@ class UserViewModel(private val repository: UserRepository): ViewModel() {
 }
 
 class UserViewModelFactory(private val repository: UserRepository): ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(UserViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return UserViewModel(repository) as T
