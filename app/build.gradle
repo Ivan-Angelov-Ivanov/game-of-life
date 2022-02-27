@@ -15,7 +15,7 @@ android {
         applicationId "com.example.gameoflife"
         minSdkVersion 31
         targetSdkVersion 31
-        versionCode 2
+        versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,9 +25,9 @@ android {
     signingConfigs {
         defaultConfig {
             storeFile file("gameoflife_keystore.jks")
-            storePassword "test123"
+            storePassword signing_secret
             keyAlias "appkey"
-            keyPassword "test123"
+            keyPassword signing_secret
         }
     }
 
