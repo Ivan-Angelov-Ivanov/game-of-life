@@ -27,7 +27,7 @@ android {
             storeFile file("gameoflife_keystore.jks")
             storePassword "test123"
             keyAlias "appkey"
-            keyPassword signing_secret
+            keyPassword "test123"
         }
     }
 
