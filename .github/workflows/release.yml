@@ -19,7 +19,7 @@ jobs:
           docker-android-tag: api-29-ndk-v1.1.0
           exec: |
             export ANDROID_SIGN_SECRET=${{ secrets.STOREPASSWORD }};
-            export FIREBASE_TOKEN=4/1AX4XfWj20T5UMJY-XIbqNJUFBxU3FRBGxwKHqlbq9iif0o5LRht9iOLvyew
+            export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }};
             apt-get update;
             apt-get install -y curl sudo;
             curl -sL firebase.tools | bash;
