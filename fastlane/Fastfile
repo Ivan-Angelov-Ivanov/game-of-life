@@ -83,7 +83,7 @@ platform :android do
         message: changelog
       )
       increment_build_number_android
-      git_commit(path: ["./app/build.gradle"], message: "Bump to version #{versionName} build #{buildNumber} [automated]")
+      git_commit(path: ["./app/build.gradle"], message: "Bump to version #{get_version_name_android} build #{get_build_number_android} [automated]")
 
       push_to_git_remote()
     end
@@ -110,10 +110,7 @@ platform :android do
     ## Distribute
     lane :distribute_to_firebase do |options|
       appid = "1:328772802946:android:ef8d2c4f3b9b09d3ac179b"
-      release_notes = "Test"
-      if options[:release_notes]
-        release_notes = options[:release_notes]
-      end
+      release_notes = "GameOfLife #{options[:environment]}"
 
       firebase_app_distribution(
         app: appid,
